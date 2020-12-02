@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.RideworkMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.Ridework">
+    <id column="or_id" jdbcType="INTEGER" property="orId" />
+    <id column="rider_num" jdbcType="INTEGER" property="riderNum" />
+    <result column="rideraccount_time" jdbcType="TIMESTAMP" property="rideraccountTime" />
+    <result column="rideraccount_eva" jdbcType="VARCHAR" property="rideraccountEva" />
+    <result column="rideraccount_prize" jdbcType="DECIMAL" property="rideraccountPrize" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    or_id, rider_num, rideraccount_time, rideraccount_eva, rideraccount_prize
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.takeaway.meal.model.RideworkKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ridework
+    where or_id = #{orId,jdbcType=INTEGER}
+      and rider_num = #{riderNum,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.takeaway.meal.model.RideworkKey">
+    delete from ridework
+    where or_id = #{orId,jdbcType=INTEGER}
+      and rider_num = #{riderNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.Ridework">
+    insert into ridework (or_id, rider_num, rideraccount_time, 
+      rideraccount_eva, rideraccount_prize)
+    values (#{orId,jdbcType=INTEGER}, #{riderNum,jdbcType=INTEGER}, #{rideraccountTime,jdbcType=TIMESTAMP}, 
+      #{rideraccountEva,jdbcType=VARCHAR}, #{rideraccountPrize,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.Ridework">
+    insert into ridework
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orId != null">
+        or_id,
+      </if>
+      <if test="riderNum != null">
+        rider_num,
+      </if>
+      <if test="rideraccountTime != null">
+        rideraccount_time,
+      </if>
+      <if test="rideraccountEva != null">
+        rideraccount_eva,
+      </if>
+      <if test="rideraccountPrize != null">
+        rideraccount_prize,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orId != null">
+        #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="riderNum != null">
+        #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="rideraccountTime != null">
+        #{rideraccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rideraccountEva != null">
+        #{rideraccountEva,jdbcType=VARCHAR},
+      </if>
+      <if test="rideraccountPrize != null">
+        #{rideraccountPrize,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.Ridework">
+    update ridework
+    <set>
+      <if test="rideraccountTime != null">
+        rideraccount_time = #{rideraccountTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="rideraccountEva != null">
+        rideraccount_eva = #{rideraccountEva,jdbcType=VARCHAR},
+      </if>
+      <if test="rideraccountPrize != null">
+        rideraccount_prize = #{rideraccountPrize,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where or_id = #{orId,jdbcType=INTEGER}
+      and rider_num = #{riderNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.Ridework">
+    update ridework
+    set rideraccount_time = #{rideraccountTime,jdbcType=TIMESTAMP},
+      rideraccount_eva = #{rideraccountEva,jdbcType=VARCHAR},
+      rideraccount_prize = #{rideraccountPrize,jdbcType=DECIMAL}
+    where or_id = #{orId,jdbcType=INTEGER}
+      and rider_num = #{riderNum,jdbcType=INTEGER}
+  </update>
+</mapper>

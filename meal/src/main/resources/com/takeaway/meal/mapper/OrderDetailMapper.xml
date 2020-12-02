@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.OrderDetail">
+    <id column="or_id" jdbcType="INTEGER" property="orId" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="rider_num" jdbcType="INTEGER" property="riderNum" />
+    <result column="or_num" jdbcType="DECIMAL" property="orNum" />
+    <result column="or_prize" jdbcType="REAL" property="orPrize" />
+    <result column="or_discount" jdbcType="REAL" property="orDiscount" />
+    <result column="riderev_eva" jdbcType="VARCHAR" property="riderevEva" />
+    <result column="riderev_content" jdbcType="VARCHAR" property="riderevContent" />
+    <result column="riderev_time" jdbcType="TIMESTAMP" property="riderevTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    or_id, order_id, rider_num, or_num, or_prize, or_discount, riderev_eva, riderev_content, 
+    riderev_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where or_id = #{orId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_detail
+    where or_id = #{orId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.OrderDetail">
+    insert into order_detail (or_id, order_id, rider_num, 
+      or_num, or_prize, or_discount, 
+      riderev_eva, riderev_content, riderev_time
+      )
+    values (#{orId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{riderNum,jdbcType=INTEGER}, 
+      #{orNum,jdbcType=DECIMAL}, #{orPrize,jdbcType=REAL}, #{orDiscount,jdbcType=REAL}, 
+      #{riderevEva,jdbcType=VARCHAR}, #{riderevContent,jdbcType=VARCHAR}, #{riderevTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.OrderDetail">
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orId != null">
+        or_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="riderNum != null">
+        rider_num,
+      </if>
+      <if test="orNum != null">
+        or_num,
+      </if>
+      <if test="orPrize != null">
+        or_prize,
+      </if>
+      <if test="orDiscount != null">
+        or_discount,
+      </if>
+      <if test="riderevEva != null">
+        riderev_eva,
+      </if>
+      <if test="riderevContent != null">
+        riderev_content,
+      </if>
+      <if test="riderevTime != null">
+        riderev_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orId != null">
+        #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="riderNum != null">
+        #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="orNum != null">
+        #{orNum,jdbcType=DECIMAL},
+      </if>
+      <if test="orPrize != null">
+        #{orPrize,jdbcType=REAL},
+      </if>
+      <if test="orDiscount != null">
+        #{orDiscount,jdbcType=REAL},
+      </if>
+      <if test="riderevEva != null">
+        #{riderevEva,jdbcType=VARCHAR},
+      </if>
+      <if test="riderevContent != null">
+        #{riderevContent,jdbcType=VARCHAR},
+      </if>
+      <if test="riderevTime != null">
+        #{riderevTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.OrderDetail">
+    update order_detail
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="riderNum != null">
+        rider_num = #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="orNum != null">
+        or_num = #{orNum,jdbcType=DECIMAL},
+      </if>
+      <if test="orPrize != null">
+        or_prize = #{orPrize,jdbcType=REAL},
+      </if>
+      <if test="orDiscount != null">
+        or_discount = #{orDiscount,jdbcType=REAL},
+      </if>
+      <if test="riderevEva != null">
+        riderev_eva = #{riderevEva,jdbcType=VARCHAR},
+      </if>
+      <if test="riderevContent != null">
+        riderev_content = #{riderevContent,jdbcType=VARCHAR},
+      </if>
+      <if test="riderevTime != null">
+        riderev_time = #{riderevTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where or_id = #{orId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.OrderDetail">
+    update order_detail
+    set order_id = #{orderId,jdbcType=INTEGER},
+      rider_num = #{riderNum,jdbcType=INTEGER},
+      or_num = #{orNum,jdbcType=DECIMAL},
+      or_prize = #{orPrize,jdbcType=REAL},
+      or_discount = #{orDiscount,jdbcType=REAL},
+      riderev_eva = #{riderevEva,jdbcType=VARCHAR},
+      riderev_content = #{riderevContent,jdbcType=VARCHAR},
+      riderev_time = #{riderevTime,jdbcType=TIMESTAMP}
+    where or_id = #{orId,jdbcType=INTEGER}
+  </update>
+</mapper>

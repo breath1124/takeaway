@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealMerchantMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealMerchant">
+    <id column="merchant_num" jdbcType="INTEGER" property="merchantNum" />
+    <result column="merchant_name" jdbcType="VARCHAR" property="merchantName" />
+    <result column="merchant_describe" jdbcType="VARCHAR" property="merchantDescribe" />
+    <result column="merchant_account" jdbcType="VARCHAR" property="merchantAccount" />
+    <result column="merchant_pwd" jdbcType="VARCHAR" property="merchantPwd" />
+    <result column="merchant_order" jdbcType="INTEGER" property="merchantOrder" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    merchant_num, merchant_name, merchant_describe, merchant_account, merchant_pwd, merchant_order
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_merchant
+    where merchant_num = #{merchantNum,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_merchant
+    where merchant_num = #{merchantNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealMerchant">
+    insert into meal_merchant (merchant_num, merchant_name, merchant_describe, 
+      merchant_account, merchant_pwd, merchant_order
+      )
+    values (#{merchantNum,jdbcType=INTEGER}, #{merchantName,jdbcType=VARCHAR}, #{merchantDescribe,jdbcType=VARCHAR}, 
+      #{merchantAccount,jdbcType=VARCHAR}, #{merchantPwd,jdbcType=VARCHAR}, #{merchantOrder,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealMerchant">
+    insert into meal_merchant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merchantNum != null">
+        merchant_num,
+      </if>
+      <if test="merchantName != null">
+        merchant_name,
+      </if>
+      <if test="merchantDescribe != null">
+        merchant_describe,
+      </if>
+      <if test="merchantAccount != null">
+        merchant_account,
+      </if>
+      <if test="merchantPwd != null">
+        merchant_pwd,
+      </if>
+      <if test="merchantOrder != null">
+        merchant_order,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merchantNum != null">
+        #{merchantNum,jdbcType=INTEGER},
+      </if>
+      <if test="merchantName != null">
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantDescribe != null">
+        #{merchantDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantAccount != null">
+        #{merchantAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPwd != null">
+        #{merchantPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantOrder != null">
+        #{merchantOrder,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealMerchant">
+    update meal_merchant
+    <set>
+      <if test="merchantName != null">
+        merchant_name = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantDescribe != null">
+        merchant_describe = #{merchantDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantAccount != null">
+        merchant_account = #{merchantAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantPwd != null">
+        merchant_pwd = #{merchantPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantOrder != null">
+        merchant_order = #{merchantOrder,jdbcType=INTEGER},
+      </if>
+    </set>
+    where merchant_num = #{merchantNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealMerchant">
+    update meal_merchant
+    set merchant_name = #{merchantName,jdbcType=VARCHAR},
+      merchant_describe = #{merchantDescribe,jdbcType=VARCHAR},
+      merchant_account = #{merchantAccount,jdbcType=VARCHAR},
+      merchant_pwd = #{merchantPwd,jdbcType=VARCHAR},
+      merchant_order = #{merchantOrder,jdbcType=INTEGER}
+    where merchant_num = #{merchantNum,jdbcType=INTEGER}
+  </update>
+</mapper>

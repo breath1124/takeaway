@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealRemarkMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealRemark">
+    <id column="usr_id" jdbcType="INTEGER" property="usrId" />
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="remark_detail" jdbcType="VARCHAR" property="remarkDetail" />
+    <result column="remark_date" jdbcType="TIMESTAMP" property="remarkDate" />
+    <result column="remark_star" jdbcType="VARCHAR" property="remarkStar" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.takeaway.meal.model.MealRemark">
+    <result column="remark_picture" jdbcType="LONGVARBINARY" property="remarkPicture" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    usr_id, order_id, remark_detail, remark_date, remark_star
+  </sql>
+  <sql id="Blob_Column_List">
+    remark_picture
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.takeaway.meal.model.MealRemarkKey" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from meal_remark
+    where usr_id = #{usrId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.takeaway.meal.model.MealRemarkKey">
+    delete from meal_remark
+    where usr_id = #{usrId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealRemark">
+    insert into meal_remark (usr_id, order_id, remark_detail, 
+      remark_date, remark_star, remark_picture
+      )
+    values (#{usrId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{remarkDetail,jdbcType=VARCHAR}, 
+      #{remarkDate,jdbcType=TIMESTAMP}, #{remarkStar,jdbcType=VARCHAR}, #{remarkPicture,jdbcType=LONGVARBINARY}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealRemark">
+    insert into meal_remark
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        usr_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="remarkDetail != null">
+        remark_detail,
+      </if>
+      <if test="remarkDate != null">
+        remark_date,
+      </if>
+      <if test="remarkStar != null">
+        remark_star,
+      </if>
+      <if test="remarkPicture != null">
+        remark_picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="remarkDetail != null">
+        #{remarkDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkDate != null">
+        #{remarkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarkStar != null">
+        #{remarkStar,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkPicture != null">
+        #{remarkPicture,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealRemark">
+    update meal_remark
+    <set>
+      <if test="remarkDetail != null">
+        remark_detail = #{remarkDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkDate != null">
+        remark_date = #{remarkDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarkStar != null">
+        remark_star = #{remarkStar,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkPicture != null">
+        remark_picture = #{remarkPicture,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where usr_id = #{usrId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.takeaway.meal.model.MealRemark">
+    update meal_remark
+    set remark_detail = #{remarkDetail,jdbcType=VARCHAR},
+      remark_date = #{remarkDate,jdbcType=TIMESTAMP},
+      remark_star = #{remarkStar,jdbcType=VARCHAR},
+      remark_picture = #{remarkPicture,jdbcType=LONGVARBINARY}
+    where usr_id = #{usrId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealRemark">
+    update meal_remark
+    set remark_detail = #{remarkDetail,jdbcType=VARCHAR},
+      remark_date = #{remarkDate,jdbcType=TIMESTAMP},
+      remark_star = #{remarkStar,jdbcType=VARCHAR}
+    where usr_id = #{usrId,jdbcType=INTEGER}
+      and order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

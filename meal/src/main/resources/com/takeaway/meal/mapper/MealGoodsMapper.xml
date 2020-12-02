@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealGoods">
+    <id column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="merchant_num" jdbcType="INTEGER" property="merchantNum" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_price" jdbcType="DECIMAL" property="goodsPrice" />
+    <result column="goods_vipPrice" jdbcType="DECIMAL" property="goodsVipprice" />
+    <result column="goods_count" jdbcType="INTEGER" property="goodsCount" />
+    <result column="goods_spec" jdbcType="VARCHAR" property="goodsSpec" />
+    <result column="good_detail" jdbcType="VARCHAR" property="goodDetail" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    goods_id, merchant_num, goods_name, goods_price, goods_vipPrice, goods_count, goods_spec, 
+    good_detail
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealGoods">
+    insert into meal_goods (goods_id, merchant_num, goods_name, 
+      goods_price, goods_vipPrice, goods_count, 
+      goods_spec, good_detail)
+    values (#{goodsId,jdbcType=INTEGER}, #{merchantNum,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, 
+      #{goodsPrice,jdbcType=DECIMAL}, #{goodsVipprice,jdbcType=DECIMAL}, #{goodsCount,jdbcType=INTEGER}, 
+      #{goodsSpec,jdbcType=VARCHAR}, #{goodDetail,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealGoods">
+    insert into meal_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="merchantNum != null">
+        merchant_num,
+      </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsPrice != null">
+        goods_price,
+      </if>
+      <if test="goodsVipprice != null">
+        goods_vipPrice,
+      </if>
+      <if test="goodsCount != null">
+        goods_count,
+      </if>
+      <if test="goodsSpec != null">
+        goods_spec,
+      </if>
+      <if test="goodDetail != null">
+        good_detail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="merchantNum != null">
+        #{merchantNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsVipprice != null">
+        #{goodsVipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCount != null">
+        #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpec != null">
+        #{goodsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDetail != null">
+        #{goodDetail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealGoods">
+    update meal_goods
+    <set>
+      <if test="merchantNum != null">
+        merchant_num = #{merchantNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsPrice != null">
+        goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsVipprice != null">
+        goods_vipPrice = #{goodsVipprice,jdbcType=DECIMAL},
+      </if>
+      <if test="goodsCount != null">
+        goods_count = #{goodsCount,jdbcType=INTEGER},
+      </if>
+      <if test="goodsSpec != null">
+        goods_spec = #{goodsSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="goodDetail != null">
+        good_detail = #{goodDetail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealGoods">
+    update meal_goods
+    set merchant_num = #{merchantNum,jdbcType=INTEGER},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_price = #{goodsPrice,jdbcType=DECIMAL},
+      goods_vipPrice = #{goodsVipprice,jdbcType=DECIMAL},
+      goods_count = #{goodsCount,jdbcType=INTEGER},
+      goods_spec = #{goodsSpec,jdbcType=VARCHAR},
+      good_detail = #{goodDetail,jdbcType=VARCHAR}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

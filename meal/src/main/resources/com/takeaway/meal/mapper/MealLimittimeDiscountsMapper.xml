@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealLimittimeDiscountsMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealLimittimeDiscounts">
+    <id column="promotion_id" jdbcType="INTEGER" property="promotionId" />
+    <result column="goods_id" jdbcType="INTEGER" property="goodsId" />
+    <result column="promotion_price" jdbcType="DECIMAL" property="promotionPrice" />
+    <result column="promotion_cnt" jdbcType="INTEGER" property="promotionCnt" />
+    <result column="promotion_begin" jdbcType="DATE" property="promotionBegin" />
+    <result column="promotion_end" jdbcType="DATE" property="promotionEnd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    promotion_id, goods_id, promotion_price, promotion_cnt, promotion_begin, promotion_end
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_limittime_discounts
+    where promotion_id = #{promotionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_limittime_discounts
+    where promotion_id = #{promotionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealLimittimeDiscounts">
+    insert into meal_limittime_discounts (promotion_id, goods_id, promotion_price, 
+      promotion_cnt, promotion_begin, promotion_end
+      )
+    values (#{promotionId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{promotionPrice,jdbcType=DECIMAL}, 
+      #{promotionCnt,jdbcType=INTEGER}, #{promotionBegin,jdbcType=DATE}, #{promotionEnd,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealLimittimeDiscounts">
+    insert into meal_limittime_discounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="promotionId != null">
+        promotion_id,
+      </if>
+      <if test="goodsId != null">
+        goods_id,
+      </if>
+      <if test="promotionPrice != null">
+        promotion_price,
+      </if>
+      <if test="promotionCnt != null">
+        promotion_cnt,
+      </if>
+      <if test="promotionBegin != null">
+        promotion_begin,
+      </if>
+      <if test="promotionEnd != null">
+        promotion_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="promotionId != null">
+        #{promotionId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null">
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="promotionPrice != null">
+        #{promotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionCnt != null">
+        #{promotionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="promotionBegin != null">
+        #{promotionBegin,jdbcType=DATE},
+      </if>
+      <if test="promotionEnd != null">
+        #{promotionEnd,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealLimittimeDiscounts">
+    update meal_limittime_discounts
+    <set>
+      <if test="goodsId != null">
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="promotionPrice != null">
+        promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="promotionCnt != null">
+        promotion_cnt = #{promotionCnt,jdbcType=INTEGER},
+      </if>
+      <if test="promotionBegin != null">
+        promotion_begin = #{promotionBegin,jdbcType=DATE},
+      </if>
+      <if test="promotionEnd != null">
+        promotion_end = #{promotionEnd,jdbcType=DATE},
+      </if>
+    </set>
+    where promotion_id = #{promotionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealLimittimeDiscounts">
+    update meal_limittime_discounts
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      promotion_price = #{promotionPrice,jdbcType=DECIMAL},
+      promotion_cnt = #{promotionCnt,jdbcType=INTEGER},
+      promotion_begin = #{promotionBegin,jdbcType=DATE},
+      promotion_end = #{promotionEnd,jdbcType=DATE}
+    where promotion_id = #{promotionId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealUsrMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealUsr">
+    <id column="usr_id" jdbcType="INTEGER" property="usrId" />
+    <result column="usr_name" jdbcType="VARCHAR" property="usrName" />
+    <result column="usr_sex" jdbcType="VARCHAR" property="usrSex" />
+    <result column="usr_pwd" jdbcType="VARCHAR" property="usrPwd" />
+    <result column="usr_tel" jdbcType="VARCHAR" property="usrTel" />
+    <result column="usr_email" jdbcType="VARCHAR" property="usrEmail" />
+    <result column="usr_city" jdbcType="VARCHAR" property="usrCity" />
+    <result column="usr_registerTime" jdbcType="TIMESTAMP" property="usrRegistertime" />
+    <result column="usr_isVIP" jdbcType="VARCHAR" property="usrIsvip" />
+    <result column="usr_vipDDL" jdbcType="TIMESTAMP" property="usrVipddl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    usr_id, usr_name, usr_sex, usr_pwd, usr_tel, usr_email, usr_city, usr_registerTime, 
+    usr_isVIP, usr_vipDDL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_usr
+    where usr_id = #{usrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_usr
+    where usr_id = #{usrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealUsr">
+    insert into meal_usr (usr_id, usr_name, usr_sex, 
+      usr_pwd, usr_tel, usr_email, 
+      usr_city, usr_registerTime, usr_isVIP, 
+      usr_vipDDL)
+    values (#{usrId,jdbcType=INTEGER}, #{usrName,jdbcType=VARCHAR}, #{usrSex,jdbcType=VARCHAR}, 
+      #{usrPwd,jdbcType=VARCHAR}, #{usrTel,jdbcType=VARCHAR}, #{usrEmail,jdbcType=VARCHAR}, 
+      #{usrCity,jdbcType=VARCHAR}, #{usrRegistertime,jdbcType=TIMESTAMP}, #{usrIsvip,jdbcType=VARCHAR}, 
+      #{usrVipddl,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealUsr">
+    insert into meal_usr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        usr_id,
+      </if>
+      <if test="usrName != null">
+        usr_name,
+      </if>
+      <if test="usrSex != null">
+        usr_sex,
+      </if>
+      <if test="usrPwd != null">
+        usr_pwd,
+      </if>
+      <if test="usrTel != null">
+        usr_tel,
+      </if>
+      <if test="usrEmail != null">
+        usr_email,
+      </if>
+      <if test="usrCity != null">
+        usr_city,
+      </if>
+      <if test="usrRegistertime != null">
+        usr_registerTime,
+      </if>
+      <if test="usrIsvip != null">
+        usr_isVIP,
+      </if>
+      <if test="usrVipddl != null">
+        usr_vipDDL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="usrId != null">
+        #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="usrName != null">
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrSex != null">
+        #{usrSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPwd != null">
+        #{usrPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usrTel != null">
+        #{usrTel,jdbcType=VARCHAR},
+      </if>
+      <if test="usrEmail != null">
+        #{usrEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCity != null">
+        #{usrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="usrRegistertime != null">
+        #{usrRegistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usrIsvip != null">
+        #{usrIsvip,jdbcType=VARCHAR},
+      </if>
+      <if test="usrVipddl != null">
+        #{usrVipddl,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealUsr">
+    update meal_usr
+    <set>
+      <if test="usrName != null">
+        usr_name = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrSex != null">
+        usr_sex = #{usrSex,jdbcType=VARCHAR},
+      </if>
+      <if test="usrPwd != null">
+        usr_pwd = #{usrPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="usrTel != null">
+        usr_tel = #{usrTel,jdbcType=VARCHAR},
+      </if>
+      <if test="usrEmail != null">
+        usr_email = #{usrEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="usrCity != null">
+        usr_city = #{usrCity,jdbcType=VARCHAR},
+      </if>
+      <if test="usrRegistertime != null">
+        usr_registerTime = #{usrRegistertime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="usrIsvip != null">
+        usr_isVIP = #{usrIsvip,jdbcType=VARCHAR},
+      </if>
+      <if test="usrVipddl != null">
+        usr_vipDDL = #{usrVipddl,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where usr_id = #{usrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealUsr">
+    update meal_usr
+    set usr_name = #{usrName,jdbcType=VARCHAR},
+      usr_sex = #{usrSex,jdbcType=VARCHAR},
+      usr_pwd = #{usrPwd,jdbcType=VARCHAR},
+      usr_tel = #{usrTel,jdbcType=VARCHAR},
+      usr_email = #{usrEmail,jdbcType=VARCHAR},
+      usr_city = #{usrCity,jdbcType=VARCHAR},
+      usr_registerTime = #{usrRegistertime,jdbcType=TIMESTAMP},
+      usr_isVIP = #{usrIsvip,jdbcType=VARCHAR},
+      usr_vipDDL = #{usrVipddl,jdbcType=TIMESTAMP}
+    where usr_id = #{usrId,jdbcType=INTEGER}
+  </update>
+</mapper>

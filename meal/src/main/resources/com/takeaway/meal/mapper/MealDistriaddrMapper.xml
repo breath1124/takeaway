@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealDistriaddrMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealDistriaddr">
+    <id column="addr_id" jdbcType="INTEGER" property="addrId" />
+    <result column="usr_id" jdbcType="INTEGER" property="usrId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="district" jdbcType="VARCHAR" property="district" />
+    <result column="addr" jdbcType="VARCHAR" property="addr" />
+    <result column="usr_name" jdbcType="VARCHAR" property="usrName" />
+    <result column="usr_tel" jdbcType="VARCHAR" property="usrTel" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    addr_id, usr_id, province, city, district, addr, usr_name, usr_tel
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_distriaddr
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_distriaddr
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealDistriaddr">
+    insert into meal_distriaddr (addr_id, usr_id, province, 
+      city, district, addr, 
+      usr_name, usr_tel)
+    values (#{addrId,jdbcType=INTEGER}, #{usrId,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{usrName,jdbcType=VARCHAR}, #{usrTel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealDistriaddr">
+    insert into meal_distriaddr
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addrId != null">
+        addr_id,
+      </if>
+      <if test="usrId != null">
+        usr_id,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="district != null">
+        district,
+      </if>
+      <if test="addr != null">
+        addr,
+      </if>
+      <if test="usrName != null">
+        usr_name,
+      </if>
+      <if test="usrTel != null">
+        usr_tel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addrId != null">
+        #{addrId,jdbcType=INTEGER},
+      </if>
+      <if test="usrId != null">
+        #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="usrName != null">
+        #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrTel != null">
+        #{usrTel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealDistriaddr">
+    update meal_distriaddr
+    <set>
+      <if test="usrId != null">
+        usr_id = #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="district != null">
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null">
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="usrName != null">
+        usr_name = #{usrName,jdbcType=VARCHAR},
+      </if>
+      <if test="usrTel != null">
+        usr_tel = #{usrTel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealDistriaddr">
+    update meal_distriaddr
+    set usr_id = #{usrId,jdbcType=INTEGER},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district = #{district,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      usr_name = #{usrName,jdbcType=VARCHAR},
+      usr_tel = #{usrTel,jdbcType=VARCHAR}
+    where addr_id = #{addrId,jdbcType=INTEGER}
+  </update>
+</mapper>

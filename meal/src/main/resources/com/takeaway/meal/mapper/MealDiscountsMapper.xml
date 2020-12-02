@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealDiscountsMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealDiscounts">
+    <id column="discnt_id" jdbcType="INTEGER" property="discntId" />
+    <result column="discnt_detail" jdbcType="VARCHAR" property="discntDetail" />
+    <result column="discnt_suitMoney" jdbcType="DECIMAL" property="discntSuitmoney" />
+    <result column="discnt_minuMoney" jdbcType="DECIMAL" property="discntMinumoney" />
+    <result column="discnt_begin" jdbcType="DATE" property="discntBegin" />
+    <result column="discnt_end" jdbcType="DATE" property="discntEnd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    discnt_id, discnt_detail, discnt_suitMoney, discnt_minuMoney, discnt_begin, discnt_end
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_discounts
+    where discnt_id = #{discntId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_discounts
+    where discnt_id = #{discntId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealDiscounts">
+    insert into meal_discounts (discnt_id, discnt_detail, discnt_suitMoney, 
+      discnt_minuMoney, discnt_begin, discnt_end
+      )
+    values (#{discntId,jdbcType=INTEGER}, #{discntDetail,jdbcType=VARCHAR}, #{discntSuitmoney,jdbcType=DECIMAL}, 
+      #{discntMinumoney,jdbcType=DECIMAL}, #{discntBegin,jdbcType=DATE}, #{discntEnd,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealDiscounts">
+    insert into meal_discounts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="discntId != null">
+        discnt_id,
+      </if>
+      <if test="discntDetail != null">
+        discnt_detail,
+      </if>
+      <if test="discntSuitmoney != null">
+        discnt_suitMoney,
+      </if>
+      <if test="discntMinumoney != null">
+        discnt_minuMoney,
+      </if>
+      <if test="discntBegin != null">
+        discnt_begin,
+      </if>
+      <if test="discntEnd != null">
+        discnt_end,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="discntId != null">
+        #{discntId,jdbcType=INTEGER},
+      </if>
+      <if test="discntDetail != null">
+        #{discntDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="discntSuitmoney != null">
+        #{discntSuitmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discntMinumoney != null">
+        #{discntMinumoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discntBegin != null">
+        #{discntBegin,jdbcType=DATE},
+      </if>
+      <if test="discntEnd != null">
+        #{discntEnd,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealDiscounts">
+    update meal_discounts
+    <set>
+      <if test="discntDetail != null">
+        discnt_detail = #{discntDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="discntSuitmoney != null">
+        discnt_suitMoney = #{discntSuitmoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discntMinumoney != null">
+        discnt_minuMoney = #{discntMinumoney,jdbcType=DECIMAL},
+      </if>
+      <if test="discntBegin != null">
+        discnt_begin = #{discntBegin,jdbcType=DATE},
+      </if>
+      <if test="discntEnd != null">
+        discnt_end = #{discntEnd,jdbcType=DATE},
+      </if>
+    </set>
+    where discnt_id = #{discntId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealDiscounts">
+    update meal_discounts
+    set discnt_detail = #{discntDetail,jdbcType=VARCHAR},
+      discnt_suitMoney = #{discntSuitmoney,jdbcType=DECIMAL},
+      discnt_minuMoney = #{discntMinumoney,jdbcType=DECIMAL},
+      discnt_begin = #{discntBegin,jdbcType=DATE},
+      discnt_end = #{discntEnd,jdbcType=DATE}
+    where discnt_id = #{discntId,jdbcType=INTEGER}
+  </update>
+</mapper>

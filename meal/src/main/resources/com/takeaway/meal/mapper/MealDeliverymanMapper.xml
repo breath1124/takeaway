@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealDeliverymanMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealDeliveryman">
+    <id column="rider_num" jdbcType="INTEGER" property="riderNum" />
+    <result column="rider_name" jdbcType="VARCHAR" property="riderName" />
+    <result column="rider_sex" jdbcType="VARCHAR" property="riderSex" />
+    <result column="rider_age" jdbcType="INTEGER" property="riderAge" />
+    <result column="rider_account" jdbcType="VARCHAR" property="riderAccount" />
+    <result column="rider_pwd" jdbcType="VARCHAR" property="riderPwd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rider_num, rider_name, rider_sex, rider_age, rider_account, rider_pwd
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from deliveryman
+    where rider_num = #{riderNum,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from deliveryman
+    where rider_num = #{riderNum,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealDeliveryman">
+    insert into deliveryman (rider_num, rider_name, rider_sex, 
+      rider_age, rider_account, rider_pwd
+      )
+    values (#{riderNum,jdbcType=INTEGER}, #{riderName,jdbcType=VARCHAR}, #{riderSex,jdbcType=VARCHAR}, 
+      #{riderAge,jdbcType=INTEGER}, #{riderAccount,jdbcType=VARCHAR}, #{riderPwd,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealDeliveryman">
+    insert into deliveryman
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="riderNum != null">
+        rider_num,
+      </if>
+      <if test="riderName != null">
+        rider_name,
+      </if>
+      <if test="riderSex != null">
+        rider_sex,
+      </if>
+      <if test="riderAge != null">
+        rider_age,
+      </if>
+      <if test="riderAccount != null">
+        rider_account,
+      </if>
+      <if test="riderPwd != null">
+        rider_pwd,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="riderNum != null">
+        #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="riderName != null">
+        #{riderName,jdbcType=VARCHAR},
+      </if>
+      <if test="riderSex != null">
+        #{riderSex,jdbcType=VARCHAR},
+      </if>
+      <if test="riderAge != null">
+        #{riderAge,jdbcType=INTEGER},
+      </if>
+      <if test="riderAccount != null">
+        #{riderAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="riderPwd != null">
+        #{riderPwd,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealDeliveryman">
+    update deliveryman
+    <set>
+      <if test="riderName != null">
+        rider_name = #{riderName,jdbcType=VARCHAR},
+      </if>
+      <if test="riderSex != null">
+        rider_sex = #{riderSex,jdbcType=VARCHAR},
+      </if>
+      <if test="riderAge != null">
+        rider_age = #{riderAge,jdbcType=INTEGER},
+      </if>
+      <if test="riderAccount != null">
+        rider_account = #{riderAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="riderPwd != null">
+        rider_pwd = #{riderPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rider_num = #{riderNum,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealDeliveryman">
+    update deliveryman
+    set rider_name = #{riderName,jdbcType=VARCHAR},
+      rider_sex = #{riderSex,jdbcType=VARCHAR},
+      rider_age = #{riderAge,jdbcType=INTEGER},
+      rider_account = #{riderAccount,jdbcType=VARCHAR},
+      rider_pwd = #{riderPwd,jdbcType=VARCHAR}
+    where rider_num = #{riderNum,jdbcType=INTEGER}
+  </update>
+</mapper>

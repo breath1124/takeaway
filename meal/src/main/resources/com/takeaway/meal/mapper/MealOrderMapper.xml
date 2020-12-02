@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.takeaway.meal.mapper.MealOrderMapper">
+  <resultMap id="BaseResultMap" type="com.takeaway.meal.model.MealOrder">
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="discnt_id" jdbcType="INTEGER" property="discntId" />
+    <result column="or_id" jdbcType="INTEGER" property="orId" />
+    <result column="addr_id" jdbcType="INTEGER" property="addrId" />
+    <result column="usr_id" jdbcType="INTEGER" property="usrId" />
+    <result column="mea_merchant_num" jdbcType="INTEGER" property="meaMerchantNum" />
+    <result column="rider_num" jdbcType="INTEGER" property="riderNum" />
+    <result column="init_money" jdbcType="DECIMAL" property="initMoney" />
+    <result column="final_money" jdbcType="DECIMAL" property="finalMoney" />
+    <result column="deliver_time" jdbcType="TIMESTAMP" property="deliverTime" />
+    <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+    <result column="merchant_num" jdbcType="INTEGER" property="merchantNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, discnt_id, or_id, addr_id, usr_id, mea_merchant_num, rider_num, init_money, 
+    final_money, deliver_time, order_state, merchant_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from meal_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from meal_order
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.takeaway.meal.model.MealOrder">
+    insert into meal_order (order_id, discnt_id, or_id, 
+      addr_id, usr_id, mea_merchant_num, 
+      rider_num, init_money, final_money, 
+      deliver_time, order_state, merchant_num
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{discntId,jdbcType=INTEGER}, #{orId,jdbcType=INTEGER}, 
+      #{addrId,jdbcType=INTEGER}, #{usrId,jdbcType=INTEGER}, #{meaMerchantNum,jdbcType=INTEGER}, 
+      #{riderNum,jdbcType=INTEGER}, #{initMoney,jdbcType=DECIMAL}, #{finalMoney,jdbcType=DECIMAL}, 
+      #{deliverTime,jdbcType=TIMESTAMP}, #{orderState,jdbcType=VARCHAR}, #{merchantNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.takeaway.meal.model.MealOrder">
+    insert into meal_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="discntId != null">
+        discnt_id,
+      </if>
+      <if test="orId != null">
+        or_id,
+      </if>
+      <if test="addrId != null">
+        addr_id,
+      </if>
+      <if test="usrId != null">
+        usr_id,
+      </if>
+      <if test="meaMerchantNum != null">
+        mea_merchant_num,
+      </if>
+      <if test="riderNum != null">
+        rider_num,
+      </if>
+      <if test="initMoney != null">
+        init_money,
+      </if>
+      <if test="finalMoney != null">
+        final_money,
+      </if>
+      <if test="deliverTime != null">
+        deliver_time,
+      </if>
+      <if test="orderState != null">
+        order_state,
+      </if>
+      <if test="merchantNum != null">
+        merchant_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="discntId != null">
+        #{discntId,jdbcType=INTEGER},
+      </if>
+      <if test="orId != null">
+        #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="addrId != null">
+        #{addrId,jdbcType=INTEGER},
+      </if>
+      <if test="usrId != null">
+        #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="meaMerchantNum != null">
+        #{meaMerchantNum,jdbcType=INTEGER},
+      </if>
+      <if test="riderNum != null">
+        #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="initMoney != null">
+        #{initMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="finalMoney != null">
+        #{finalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverTime != null">
+        #{deliverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNum != null">
+        #{merchantNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.takeaway.meal.model.MealOrder">
+    update meal_order
+    <set>
+      <if test="discntId != null">
+        discnt_id = #{discntId,jdbcType=INTEGER},
+      </if>
+      <if test="orId != null">
+        or_id = #{orId,jdbcType=INTEGER},
+      </if>
+      <if test="addrId != null">
+        addr_id = #{addrId,jdbcType=INTEGER},
+      </if>
+      <if test="usrId != null">
+        usr_id = #{usrId,jdbcType=INTEGER},
+      </if>
+      <if test="meaMerchantNum != null">
+        mea_merchant_num = #{meaMerchantNum,jdbcType=INTEGER},
+      </if>
+      <if test="riderNum != null">
+        rider_num = #{riderNum,jdbcType=INTEGER},
+      </if>
+      <if test="initMoney != null">
+        init_money = #{initMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="finalMoney != null">
+        final_money = #{finalMoney,jdbcType=DECIMAL},
+      </if>
+      <if test="deliverTime != null">
+        deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderState != null">
+        order_state = #{orderState,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNum != null">
+        merchant_num = #{merchantNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.takeaway.meal.model.MealOrder">
+    update meal_order
+    set discnt_id = #{discntId,jdbcType=INTEGER},
+      or_id = #{orId,jdbcType=INTEGER},
+      addr_id = #{addrId,jdbcType=INTEGER},
+      usr_id = #{usrId,jdbcType=INTEGER},
+      mea_merchant_num = #{meaMerchantNum,jdbcType=INTEGER},
+      rider_num = #{riderNum,jdbcType=INTEGER},
+      init_money = #{initMoney,jdbcType=DECIMAL},
+      final_money = #{finalMoney,jdbcType=DECIMAL},
+      deliver_time = #{deliverTime,jdbcType=TIMESTAMP},
+      order_state = #{orderState,jdbcType=VARCHAR},
+      merchant_num = #{merchantNum,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>
